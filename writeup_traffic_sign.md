@@ -117,15 +117,15 @@ My final model results were:
 * Internet Image test set accuracy of 40% (The images used from internet were resized to 32x32, hence some images were not classified correctly due to data loss on resize)
 
 * What was the first architecture that was tried and why was it chosen?
-LeNet was used out of the box from the previous Lab.
+<br>LeNet was used out of the box from the previous Lab.
 * What were some problems with the initial architecture?
-It didn't work well with color images. Also the improvements were not much even if epochs were increased. Probably local minima issue. Fixed this by adding dropout to the architecture.
+<br>It didn't work well with color images. Also the improvements were not much even if epochs were increased. Probably local minima issue. Fixed this by adding dropout to the architecture.
 * How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
-The model was under fitting initially when used out of the box from previous Lab. Added dropout and increased the number of epochs to achieve better results.
+<br>The model was under fitting initially when used out of the box from previous Lab. Added dropout and increased the number of epochs to achieve better results.
 * Which parameters were tuned? How were they adjusted and why?
-No of epochs were increased, dropout layer was added, keep_probs was kept 0.5 for 1st FC and 0.75 for 2nd FC. When both FC were 0.5 keep_probs, issue of under fitting arised. The model was dropping the important features and accuracy didn't improve much after few epochs.
+<br>No of epochs were increased, dropout layer was added, keep_probs was kept 0.5 for 1st FC and 0.75 for 2nd FC. When both FC were 0.5 keep_probs, issue of under fitting arised. The model was dropping the important features and accuracy didn't improve much after few epochs.
 * What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
-Dropout helped in skipping some of the unwanted connections in the FC layers which improved the accuracy further. Probably the model reached local minima or under fitting the data set.
+<br>Dropout helped in skipping some of the unwanted connections in the FC layers which improved the accuracy further. Probably the model reached local minima or under fitting the data set.
  
 ### Test a Model on New Images
 
@@ -172,5 +172,8 @@ The top probability for each image is given in below table:
 ### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
 #### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
 
+In First convolution layer, the model is able to detect the edges of the sign board.
 ![Layer 1](./output/layer1.png)
+
+In the next layer, it seems to be working on the inside part of the sign board. The visualization might be much better understandable when used on a larger sample set instead of 5 random images.
 ![Layer 2](./output/layer2.png)
