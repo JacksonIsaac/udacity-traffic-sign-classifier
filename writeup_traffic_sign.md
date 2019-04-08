@@ -76,13 +76,13 @@ My final model consisted of the following layers:
 | Layer         		|     Description	        					| 
 |:---------------------:|:---------------------------------------------:| 
 | Input         		| 32x32x1 Gray Scale image   							| 
-| Convolution 5x5     	| 1x1 stride, same padding, outputs 28x28x6 	|
+| Convolution 5x5     	| 1x1 stride, same padding, Output: 28x28x6 	|
 | RELU					|												|
 | Max pooling	      	| 2x2 stride,  outputs 14x14x6 				|
-| Convolution 5x5	    | 1x1 stride, same padding, outputs 10x10x16 	|
+| Convolution 5x5	    | 1x1 stride, same padding, Output: 10x10x16 	|
 | RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 5x5x16 				|
-| Flatten | |
+| Max pooling	      	| 2x2 stride, Output: 5x5x16 				|
+| Flatten | Convert 3-D data to 1-D |
 | Fully connected		| Input: 400, Output: 120 |
 | RELU					|												|
 | Dropout	      	| keep_prob: 0.5	|
@@ -94,14 +94,27 @@ My final model consisted of the following layers:
 
 #### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
-To train the model, I used an ....
+To train the model, I used different parameter tuning and adding dropout to the LeNet architecture. I have captured the changes and performance in the below table:
+
+| Architecture | Accuracy (on Valid set) | Hardware | FileName |
+| :-: | :-: | :-: | :-: |
+| LeNet as is from the Quiz (3 channels) | < 10% | CPU | ./lenet |
+| Gray scale with LeNet | ~40%-50% | CPU | ./lenet_grayscale_run1 |
+| Add mean and stddev parameters to Weights | ~84% | GPU | ./lenet_grayscale_run2 |
+| Re-run above on CPU | 87% | CPU | ./lenet_grayscale_run3 |
+| Epoch updated from 10 to 25 | ~87.5% | GPU | ./lenet_grayscale_run4 |
+| Add Dropout to FC1 layer | ~92.5% | GPU | ./lenet_grayscale_run5 |
+| Add Dropout to FC2 layer | ~90% | GPU | ./lenet_grayscale_run6 |
+| Epoch updated from 25 to 50 | ~86.8% | GPU | ./lenet_grayscale_run7 |
+| Increase keep_prob by 1.5 for FC2 dropout | ~93-94% | GPU | ./lenet_grayscale_run8 |
+| Re-run on CPU | ~93-94% | CPU | ./lenet_grayscale_run9 |
 
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
 My final model results were:
-* training set accuracy of ?
-* validation set accuracy of ? 
-* test set accuracy of ?
+* training set accuracy of 94.1%
+* validation set accuracy of 91.3%
+* test set accuracy of 40% (The images used from internet were resized to 32x32, hence some images were not classified correctly due to data loss on resize)
 
 If an iterative approach was chosen:
 * What was the first architecture that was tried and why was it chosen?
@@ -140,7 +153,7 @@ Here are the results of the prediction:
 | Slippery Road			| Slippery Road      							|
 
 
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
+The model was able to correctly guess 2 of the 5 traffic signs, which gives an accuracy of 40%. This will improve if the input image is cropped to the sign-board and in squared box.
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
